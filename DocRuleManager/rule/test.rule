@@ -1,0 +1,105 @@
+
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件-FromRule
+    saveFile: test_docx/3.docx
+    Module{
+        index: 1
+        name: 系统登录模块
+        ClassItem{
+            desc: 事件循环处理
+            funcContent: 完成配置文件的验证和主窗口创建等初始化工作
+            ClassDefine{
+                className: PreMain
+                superClassName: Google/heaven7
+            }
+            Field{
+                name: pMainFrame
+                type: MainFrame *
+                desc: 主窗口框架
+            }
+            Field{
+                name: pMainFrame2
+                type: MainFrame2 *
+                desc: 主窗口框架2
+            }
+            Method{
+                name: init
+                paramStr: bool test
+                returnStr: bool
+                desc: 初始化配置文件以及数据库信息等等
+            }
+            Method{
+                name: init2
+                paramStr: bool test
+                returnStr: bool
+                desc: 初始化配置文件以及数据库信息等等2
+            }
+        }
+    }
+    Module{
+            index: 2
+            name: 系统登录模块
+            ClassItem{
+                desc: 事件循环处理2
+                funcContent: 完成配置文件的验证和主窗口创建等初始化工作
+                ClassDefine{
+                    className: PreMain
+                    superClassName: Google/heaven7
+                }
+                Field{
+                    name: pMainFrame
+                    type: MainFrame *
+                    desc: 主窗口框架
+                }
+                Field{
+                    name: pMainFrame2
+                    type: MainFrame2 *
+                    desc: 主窗口框架2
+                }
+                Method{
+                    name: init
+                    paramStr: bool test
+                    returnStr: bool
+                    desc: 初始化配置文件以及数据库信息等等
+                }
+                Method{
+                    name: init2
+                    paramStr: bool test
+                    returnStr: bool
+                    desc: 初始化配置文件以及数据库信息等等2
+                }
+            }
+            ClassItem{
+                desc: 事件循环处理3
+                funcContent: 完成配置文件的验证和主窗口创建等初始化工作3
+                ClassDefine{
+                    className: PreMain3
+                    superClassName: Google/heaven7
+                }
+                Field{
+                    name: pMainFrame3
+                    type: MainFrame3 *
+                    desc: 主窗口框架3
+                }
+                Field{
+                    name: pMainFrame3
+                    type: MainFrame3 *
+                    desc: 主窗口框架3
+                }
+                Method{
+                    name: init3
+                    paramStr: bool test
+                    returnStr: bool
+                    desc: 初始化配置文件以及数据库信息等等3
+                }
+                Method{
+                    name: init3
+                    paramStr: bool test
+                    returnStr: bool
+                    desc: 初始化配置文件以及数据库信息等等3
+                }
+            }
+    }
+
+}

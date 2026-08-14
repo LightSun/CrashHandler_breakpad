@@ -1,0 +1,30 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 推理处理模块
+        ClassItem{
+            desc: 推理引擎的工厂
+            funcContent: 用于根据不同的类型创建不同的推理引擎
+            ClassDefine{
+                className: InferEngineFactory
+                superClassName:
+            }
+            /**/Field{
+                name: m_tc
+                type: int
+                desc: 并行的线程数
+            }
+            Method{
+                name: create
+                paramStr: InferEngineType
+                returnStr: SpInferEngine
+                desc: 根据引擎类型创建推理引擎
+                preset: ([如果编译指定的推理引擎是tensorrt->返回非空])
+            }
+        
+        }
+    }
+}

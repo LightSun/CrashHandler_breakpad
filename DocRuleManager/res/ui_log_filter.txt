@@ -1,0 +1,121 @@
+
+Window{
+    title: 日志过滤器
+    size: 800,600
+    listener: com.med.qa.common.log.LogListener
+
+    LinearLayout{
+        orientation: vertical
+        Space{
+            size:0,20
+        }
+        /*
+        PullDownBox{
+            id: pdb_mode
+            size: 100,20
+            items: total,group
+        }*/
+        SelectFileLine{
+            id: selectFile1
+            lab_text: 请选择文件
+            //lab_size: 50
+            btn_text: 选择文件
+            //btn_size:
+            et_size: 100,30
+            basePath: /media/heaven7/Elements_SE/study/work/MedQA/V2/JMedQA2/res
+            mode: FILE
+        }
+        Space{
+            size:0,10
+        }
+        LinearLayout{
+            orientation: horizontal
+            TextView{
+                id: tv1
+                text: 选择过滤的文本(行):
+                size: 200,50
+                padding: 10,10,10,10
+            }
+            Space{
+                size:10,0
+            }
+            EditText{
+                id: et_filter_txt
+                //text: default_text1
+                size: 200,50
+            }
+            Space{
+                size:10,0
+            }
+            Button{
+                id: bt_filter
+                text: 执行过滤
+                size: 160, 40
+            }
+            Space{
+                size:20,0
+            }
+        }
+        Space{
+            size:0,20
+        }
+        LinearLayout{
+            orientation: horizontal
+            Space{
+                size:30,0
+            }
+            TextView{
+                text: 选中文本后的offset行
+                size: 200,50
+                padding: 10,10,10,10
+            }
+            Space{
+                size:10,0
+            }
+            EditText{
+                id: et_select_offset
+                size: 200,50
+            }
+            Space{
+                size:20,0
+            }
+            Button{
+                id: bt_clear
+                text: 清空
+                size: 160, 40
+            }
+            Space{
+                size:15,0
+            }
+            Button{
+                id: bt_next
+                text: 下一步
+                size: 160, 40
+            }
+            Space{
+                size:15,0
+            }
+            Button{
+                id: bt_previous
+                text: 上一步
+                size: 160, 40
+            }
+            Space{
+                size:30,0
+            }
+        }
+        Space{
+            size:0,10
+        }
+        Scrollable{
+            id: scrollView
+            orientation: vertical
+            EditTextArea{
+                id: et_filter_result
+                size: 200,50
+                padding: 25,20,25,20
+                popup_items: selected,selected_100
+            }
+        }
+    }
+}

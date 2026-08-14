@@ -1,0 +1,93 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 加密解密模块
+        ClassItem{
+            desc: AES加解密算法的封装
+            funcContent: 主要负责AES各种算法的加密和解密
+            ClassDefine{
+                className: AES
+                superClassName:
+            }
+            Field{
+                name: m_tc
+                type: int
+                desc: 并行的线程数
+            }
+            Field{
+                name: m_maxLen
+                type: size_t
+                desc: 数据块最大的长度
+            }    
+            Method{
+                name: getMaxThreadCount
+                paramStr: void
+                returnStr: int
+                desc: 获取最大线程数
+                preset: ([->返回值大于0])
+            }
+            /**/Method{
+                name: ecb
+                paramStr: CString,CString,bool
+                returnStr: String
+                desc: ecb模式执行AES
+            }
+            /**/Method{
+                name: cbc
+                paramStr: CString,CString,CString,bool
+                returnStr: String
+                desc: cbc模式执行AES
+            }
+            /**/Method{
+                name: cfb1
+                paramStr: CString,CString,CString,bool
+                returnStr: String
+                desc: cfb1模式执行AES
+            }
+            /**/Method{
+                name: cfb8
+                paramStr: CString,CString,CString,bool
+                returnStr: String
+                desc: cfb8模式执行AES
+            }
+            Method{
+                name: cfb128
+                paramStr: CString,CString,CString,bool
+                returnStr: String
+                desc: cfb128模式执行AES
+                preset: ([加密模式下，加密的key有效并且内容不为空->返回加密后的内容][加密模式下，加密的key无效或者内容为空->返回空字符串]
+                        [解密模式下，解密的key有效并且内容不为空->返回解密后的内容][解密模式下，解密的key无效或者内容为空->返回空字符串])
+            }
+            Method{
+                name: ofb128
+                paramStr: CString,CString,CString,bool
+                returnStr: String
+                desc: cfb128模式执行AES
+                preset: ([加密模式下，加密的key有效并且内容不为空->返回加密后的内容][加密模式下，加密的key无效或者内容为空->返回空字符串]
+                         [解密模式下，解密的key有效并且内容不为空->返回解密后的内容][解密模式下，解密的key无效或者内容为空->返回空字符串])
+            }
+#            Method{
+#                name: doEncode
+#                paramStr: CString,CString,CString,DataBlock*,AESEncDec*
+#                returnStr: String
+#                desc: 执行AES加密
+#            }
+#
+#            Method{
+#                name: doDecode
+#                paramStr: CString,CString,DataBlock*,bool,AESEncDec*
+#                returnStr: String
+#                desc: 执行AES解密
+#            }
+#            Method{
+#                name: doExec
+#                paramStr: CString,CString,CString,CString,bool,AESEncDec*
+#                returnStr: String
+#                desc: 执行AES加密或者解密
+#            }
+        }
+    }
+}

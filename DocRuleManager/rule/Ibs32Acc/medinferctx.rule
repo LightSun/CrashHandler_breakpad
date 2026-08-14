@@ -1,0 +1,217 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 推理处理模块
+        ClassItem{
+            desc: 模型输入参数
+            funcContent: 处理模型的输入参数
+            ClassDefine{
+                className: OnnxInputParams
+                superClassName:
+            }
+            Field{
+                name: maxBatchSize
+                type: int
+                desc: 批量推理最大的batch
+            }
+            Field{
+                name: dataDirs
+                type: std::vector<std::string>
+                desc: 数据目录
+            }
+            Field{
+                name: inputTensorNames
+                type: std::vector<std::string>
+                desc: 输入的tensor名称
+            }
+            Field{
+                name: outputTensorNames
+                type: std::vector<std::string>
+                desc: 输出的tensor名称
+            }
+            Field{
+                name: inputFilePath
+                type: std::string
+                desc: 输入的文件路径
+            }
+            Field{
+                name: verifyInputFile
+                type: bool
+                desc: 是否校验输入文件
+            }
+            Field{
+                name: recordInferTime
+                type: bool
+                desc: 是否记录推理的时间
+            }
+            Field{
+                name: modelLoadMode
+                type: int
+                desc: 模型加载模式
+            }
+            Field{
+                name: inferEngineType
+                type: InferEngineType
+                desc: 推理引擎类型
+            }
+            Field{
+                name: o2tConfig
+                type: Onnx2TrtConfig
+                desc: 模型转换配置
+            }
+            Field{
+                name: dynamicDesc
+                type: DynamicShapeDesc
+                desc: 动态shape描述
+            }
+            Field{
+                name: dynamicDescs
+                type: List<DynamicShapeDesc>
+                desc: 多个动态shape描述
+            }
+            Method{
+                name: getMaxBatchSize
+                paramStr: void
+                returnStr: int
+                desc: 获取batch的最大值
+                preset: ([->返回batch的最大值])
+            }
+            Method{
+                name: getModuleCacheDir
+                paramStr: void
+                returnStr: String
+                desc: 获取模型缓存目录
+                preset: ([->返回模型缓存目录])
+            }
+        
+        }
+        ClassItem{
+            desc: 模型输出结构体
+            funcContent: 处理模型的输出
+            ClassDefine{
+                className: OnnxOutParams
+                superClassName:
+            }
+            Field{
+                name: outImg
+                type: cv::Mat
+                desc: 输出的图像
+            }
+            Field{
+                name: outImgs
+                type: std::vector<cv::Mat>
+                desc: 输出的多个图像
+            }
+            Field{
+                name: outDir
+                type: std::string
+                desc: 输出的目录
+            }
+            Field{
+                name: useMask
+                type: bool
+                desc: 是否使用掩码
+            }
+            Field{
+                name: masks
+                type: std::vector<std::vector<cv::Point>>
+                desc: 轮廓
+            }
+            Field{
+                name: clsRoi
+                type: std::vector<cv::Mat>
+                desc: 分类模型Roi图像
+            }
+            Field{
+                name: boxConfs
+                type: std::vector<float>
+                desc: box置信度
+            }
+            Field{
+                name: labels
+                type: std::vector<int>
+                desc: 分类的标签
+            }
+            Field{
+                name: rects
+                type: std::vector<cv::Rect>
+                desc: 多个矩形box
+            }
+            Field{
+                name: accRects
+                type: std::vector<cv::Rect>
+                desc: 多个矩形box
+            }
+            Field{
+                name: rect2fs
+                type: std::vector<cv::Rect2f>
+                desc: 多个float矩形box
+            }
+            Field{
+                name: probs
+                type: std::vector<std::vector<float>>
+                desc: 概率组合
+            }
+            Method{
+                name: resetAll
+                paramStr: void
+                returnStr: void
+                desc: 重置所有
+                preset: ([->resetAll成功])
+            }
+            Method{
+                name: getOutImages
+                paramStr: void
+                returnStr: List<Mat>&
+                desc: 获取输出的图像list
+                preset: ([->返回输出的图像list])
+            }
+            Method{
+                name: getRects
+                paramStr: void
+                returnStr: List<Mat>&
+                desc: 获取矩形框list
+                preset: ([->返回矩形框list])
+            }
+            Method{
+                name: getContours
+                paramStr: void
+                returnStr: List<Contour>&
+                desc: 获取轮廓列表
+                preset: ([->返回轮廓列表])
+            }
+            Method{
+                name: getProbs
+                paramStr: void
+                returnStr: List<List<float>>&
+                desc: 获取推理的结果概率列表
+                preset: ([->返回推理的结果概率列表])
+            }
+            Method{
+                name: getLabels
+                paramStr: void
+                returnStr: List<int>&
+                desc: 获取分类标签list
+                preset: ([->返回分类标签list])
+            }
+            Method{
+                name: getClsRoi
+                paramStr: void
+                returnStr: List<Mat>&
+                desc: 获取roi列表
+                preset: ([->返回roi列表])
+            }
+            Method{
+                name: getBoxConfidences
+                paramStr: void
+                returnStr: List<float>&
+                desc: 获取box的置信度list
+                preset: ([->返回box的置信度列表])
+            }
+        
+        }
+    }
+}

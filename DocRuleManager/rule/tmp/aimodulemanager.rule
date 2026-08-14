@@ -1,0 +1,35 @@
+
+DocRule{
+    title: AI模型加载的基类
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: AI模型加载和推理管理
+        ClassItem{
+            desc: AI模型加载
+            funcContent: 主要负责AI模型加载
+            ClassDefine{
+                className: AIModuleManager
+                superClassName:
+            }
+            Method{
+                name: loadModule
+                paramStr: void
+                returnStr: bool
+                desc: 加载AI模型
+            }
+            Method{
+                name: clearCache
+                paramStr: void
+                returnStr: void
+                desc: 清除缓存
+            }
+            Method{
+                name: init
+                paramStr: CString,int,CQString
+                returnStr: SPOnnxCtx
+                desc: 初始化模型创建上下文
+            }
+        }
+    }
+}

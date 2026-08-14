@@ -1,0 +1,167 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 推理处理模块
+        ClassItem{
+            desc: 旧版TensorRT的API处理
+            funcContent: 用于旧版TensorRT的API处理
+            ClassDefine{
+                className: MedBufferManagerV8
+                superClassName:
+            }
+            Field{
+                name: mInputTensor0
+                type: String
+                desc: 输入的tensor
+            }
+            Field{
+                name: mOutputTensor0
+                type: String
+                desc: 输出的tensor
+            }
+            Field{
+                name: mEngine
+                type: nvinfer1::ICudaEngine*
+                desc: cuda引擎 
+            }
+            Field{
+                name: mBatchSize
+                type: int
+                desc: batch推理最大batch
+            }
+            Field{
+                name: mManagedBuffers
+                type: std::vector<std::unique_ptr<samplesCommon::ManagedBuffer>>
+                desc: 推理的缓冲区
+            }
+            Field{
+                name: mDeviceBindings
+                type: std::vector<void*>
+                desc: 设备绑定的指针数组
+            }
+            Method{
+                name: getTensorShape
+                paramStr: nvinfer1::ICudaEngine*, CString
+                returnStr: nvinfer1::Dims
+                desc: 获取tensor的形状
+                preset: ([->返回tensor的形状])
+            }
+            Method{
+                name: setDynamicShape
+                paramStr: nvinfer1::IExecutionContext*,nvinfer1::ICudaEngine*,int
+                returnStr: void
+                desc: 设置动态shape
+                preset: ([->设置动态shape成功])
+            }
+            Method{
+                name: printDims
+                paramStr: CString,const nvinfer1::Dims&
+                returnStr: void
+                desc: 打印形状
+                preset: ([->printDims成功])
+            }
+            Method{
+                name: getInputTensorName0
+                paramStr: void
+                returnStr: String
+                desc: 获取输入的tensor名称
+                preset: ([->返回输入的tensor名称])
+            }
+            Method{
+                name: getOuputTensorName0
+                paramStr: void
+                returnStr: String
+                desc: 获取输出的tensor名称
+                preset: ([->返回输出的tensor名称])
+            }
+            Method{
+                name: getDeviceBindings
+                paramStr: void
+                returnStr: std::vector<void*>&
+                desc: 获取设备绑定的指针数组
+                preset: ([->返回设备绑定的指针数组])
+            }
+            Method{
+                name: getDeviceBindings
+                paramStr: void
+                returnStr: const std::vector<void*>&
+                desc: 获取设备绑定的指针数组
+                preset: ([->返回设备绑定的常量指针数组])
+            }
+            Method{
+                name: getDeviceBuffer
+                paramStr: const std::string&
+                returnStr: void*
+                desc: 获取gpu设备在内存的缓冲区指针
+                preset: ([->返回gpu设备在内存的缓冲区指针])
+            }
+            Method{
+                name: getHostBuffer
+                paramStr: const std::string&
+                returnStr:void*
+                desc: 获取主机端在内存的缓冲区指针
+                preset: ([如果传入的tensor名称存在->返回主机端在内存的缓冲区指针][如果传入的tensor名称不存在->返回空指针])
+            }
+            Method{
+                name: getHostBuffer
+                paramStr: const std::string&,int,int*
+                returnStr: void*
+                desc: 获取主机端在内存的缓冲区指针
+                preset: ([如果传入的tensor名称存在->返回主机端在内存的缓冲区指针][如果传入的tensor名称不存在->返回空指针])
+            }
+            Method{
+                name: getInShapeCount
+                paramStr: const std::string&
+                returnStr: int
+                desc: 获取输入的tensor个数
+                preset: ([->返回输入tensor个数])
+            }
+            Method{
+                name: getOutShapeCount
+                paramStr: const std::string&
+                returnStr: int
+                desc: 获取输出的tensor个数
+                preset: ([->返回输出tensor个数])
+            }
+            Method{
+                name: size
+                paramStr: const std::string&
+                returnStr: size_t
+                desc: 张量名称相对应的主机和设备缓冲区的大小
+                preset: ([如果tensor名称存在->返回对应的主机和设备缓冲区的大小][如果tensor名称不存在->返回kINVALID_SIZE_VALUE])
+            }
+            Method{
+                name: copyInputToDevice
+                paramStr: void
+                returnStr: void
+                desc: 拷贝host数据到设备
+                preset: ([->拷贝输入数据到设备成功])
+            }
+            Method{
+                name: copyOutputToHost
+                paramStr: void
+                returnStr: void
+                desc: 拷贝gpu数据到host
+                preset: ([->拷贝设备数据到内存成功])
+            }	
+
+            Method{
+                name: copyInputToDeviceAsync
+                paramStr: const cudaStream_t&
+                returnStr: void
+                desc:  将输入主机缓冲区的内容异步复制到输入设备缓冲区
+                preset: ([->拷贝输入数据到设备成功])
+            }
+            Method{
+                name: copyOutputToHostAsync
+                paramStr: const cudaStream_t&
+                returnStr: void
+                desc: 将输出设备缓冲区的内容异步复制到输出主机缓冲区
+                preset: ([->拷贝设备数据到内存成功])
+            } 	
+        }
+    }
+}

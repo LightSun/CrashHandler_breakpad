@@ -1,0 +1,31 @@
+
+Window{
+    title: test_heaven7
+    size: 800,600
+    listener: com.heaven7.gui.TestListener2
+    LinearLayout{
+        orientation: vertical
+        Space{
+            size:0,30
+        }
+        Button{
+            id: bt_switch
+            text: 切换卡片
+        }
+        CardLayout{
+            id: card
+            TextView{
+               id: tv21
+               text: 卡片1
+               size: 200,100
+               padding: 50,50,50,50
+            }
+            TextView{
+               id: tv22
+               text: 卡片2
+               size: 200,100
+               padding: 50,50,50,50
+            }
+        }
+    }
+}

@@ -1,0 +1,117 @@
+
+Window{
+    title: crash dump -- use BP
+    size: 800,600
+    listener: com.heaven7.gui.main.bp.LogListener
+
+    LinearLayout{
+        orientation: vertical
+        Space{
+            size:0,20
+        }
+        SelectFileLine{
+            id: sfl_work_dir
+            lab_text: 选择工作目录
+            btn_text: 选择目录
+            et_size: 100,30
+            basePath: /media/heaven7/h71/study/github/google/breakpad/work_dir
+            mode: DIR
+        }
+        Space{
+            size:0,10
+        }
+        SelectFileLine{
+            id: sfl_bp_bin
+            lab_text: 选择BP bin目录
+            btn_text: 选择目录
+            et_size: 100,30
+            basePath: /usr/local/bin
+            mode: DIR
+        }
+        Space{
+            size:0,10
+        }
+        SelectFileLine{
+            id: sfl_add_path
+            lab_text: add符号path
+            btn_text: 选择path
+            et_size: 100,30
+            basePath: /media/heaven7/h71/study/github/google/breakpad/tmp/release
+            mode: FILE_WITH_DIR
+        }
+        Space{
+            size:0,10
+        }
+        SelectFileLine{
+            id: sfl_dump_file
+            lab_text: 选择dump文件
+            btn_text: 选择dump文件
+            et_size: 100,30
+            basePath: /media/heaven7/h71/study/github/google/breakpad/tmp/release
+            mode: FILE
+        }
+        Space{
+            size:0,10
+        }
+        LinearLayout{
+            orientation: horizontal
+            Space{
+                size:20,0
+            }
+            Button{
+                id: bt_clear_path
+                text: 清空path
+                size: 160, 40
+            }
+            Space{
+                size:15,0
+            }
+            Button{
+                id: bt_gen_symbol
+                text: 生成符号
+                size: 160, 40
+            }
+            Space{
+                size:15,0
+            }
+            Button{
+                id: bt_dump
+                text: dump堆栈
+                size: 160, 40
+            }
+            Space{
+                size:30,0
+            }
+            Button{
+                id: bt_strip
+                text: strip
+                size: 160, 40
+            }
+            Space{
+                size:30,0
+            }
+            Button{
+                id: bt_look_setting
+                text: 查看设置
+                size: 160, 40
+            }
+            Space{
+                size:30,0
+            }
+
+        }
+        Space{
+            size:0,10
+        }
+        Scrollable{
+            id: scrollView
+            orientation: vertical
+            EditTextArea{
+                id: et_filter_result
+                size: 200,50
+                padding: 25,20,25,20
+                //popup_items: selected,selected_100
+            }
+        }
+    }
+}

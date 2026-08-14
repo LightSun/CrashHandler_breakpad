@@ -1,0 +1,71 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 加密解密模块
+        ClassItem{
+            desc: 线程池
+            funcContent: 异步并行执行任务
+            ClassDefine{
+                className: ThreadPool
+                superClassName:
+            }
+            Field{
+                name: workers
+                type: std::vector<std::thread>
+                desc: 工作的所有线程
+            }
+            Field{
+                name: tasks
+                type: std::queue< std::function<void()> >
+                desc: 任务队列
+            }
+            Field{
+                name: queue_mutex
+                type: std::mutex
+                desc: 队列同步的锁
+            }
+            Field{
+                name: condition
+                type: condition_variable
+                desc: 队列条件变量
+            }
+            Field{
+                name: stop_
+                type: int
+                desc: 是否停止
+            }
+            Method{
+                name: isStoped
+                paramStr: void
+                returnStr: bool
+                desc: 线程池是否已停止
+                preset: ([先调用了stop函数->返回真][先没有调用stop函数->返回假])
+            }
+            Method{
+                name: stop
+                paramStr: void
+                returnStr: void
+                desc: 停止异步任务
+                preset: ([->正确记录停止状态])
+            }
+            Method{
+                name: enqueue
+                paramStr: F&& f, Args&&...
+                returnStr: auto
+                desc: 将新任务加入到队列
+                preset: ([->能正确将任务加入到队列])
+            }
+            Method{
+                name: batchRawRun
+                paramStr: int,int,int,std::function<bool(int)>
+                returnStr: int
+                desc: 按照指定参数，并行运行
+                preset: ([->能正确并行的运行任务，返回并行的线程数])
+            }
+        
+        }
+    }
+}

@@ -1,0 +1,41 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 推理处理模块
+        ClassItem{
+            desc: 数据padding
+            funcContent: 根据对齐大小，padding数据
+            ClassDefine{
+                className: Padding
+                superClassName:
+            }
+            /**/Field{
+                name: m_tc
+                type: int
+                desc: 并行的线程数
+            }
+            Method{
+                name: getPKCS7PaddedLength
+                paramStr: int,int
+                returnStr: int
+                desc: 计算PKCS7 padding后的长度
+            }
+            Method{
+                name: doPKCS7Padding
+                paramStr: CString,int
+                returnStr: String
+                desc: 执行PKCS7 padding
+            }
+            Method{
+                name: doPKCS7UnPadding
+                paramStr: CString
+                returnStr: String
+                desc: 执行PKCS7 un-padding
+            }
+        
+        }
+    }
+}

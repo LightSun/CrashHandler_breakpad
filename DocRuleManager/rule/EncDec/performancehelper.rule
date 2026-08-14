@@ -1,0 +1,65 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 加密解密模块
+        ClassItem{
+            desc: 用于测量性能的辅助对象
+            funcContent: 主要用于测量程序的性能
+            ClassDefine{
+                className: PerformanceHelper
+                superClassName:
+            }
+            Field{
+                name: m_start
+                type: ClockTimeUnit
+                desc: 开始记录的时间
+            }
+            Method{
+                name: formatTime
+                paramStr: float
+                returnStr: std::string
+                desc: 格式化时间
+                preset: ([->能正确格式化时间])
+            }
+            Method{
+                name: begin
+                paramStr: void
+                returnStr: void
+                desc: 记录开始时间
+                preset: ([->能正确记录开始时间])
+            }
+            Method{
+                name: end
+                paramStr: void
+                returnStr: float
+                desc: 记录结束时间。并计算耗时（毫秒）
+                preset: ([先调用了begin函数->返回耗时的毫秒数])
+            }
+            Method{
+                name: print
+                paramStr: const std::string&
+                returnStr: void
+                desc: 根据测量的开始和结束时间，打印出来耗时
+                preset: ([先调用了begin函数->能正确打印格式化后的耗时])
+            }
+            Method{
+                name: printTo
+                paramStr: const std::string&,std::stringstream&
+                returnStr: void
+                desc: 根据测量的开始和结束时间，并打印到指定的流，
+                preset: ([先调用了begin函数->能正确将格式化后的时间输出到指定的流])
+            }
+            Method{
+                name: printTo
+                paramStr: const std::string&,std::ostringstream&
+                returnStr: void
+                desc: 根据测量的开始和结束时间，并打印到指定的流，
+                preset: ([先调用了begin函数->能正确将格式化后的时间输出到指定的流])
+            }
+        
+        }
+    }
+}

@@ -1,0 +1,55 @@
+
+Window{
+    title: xxx
+    width:
+    height:
+    size:
+    listener: xxx.class
+    LinearLayout{
+        orientation: horizontal/vertical
+        TextView{
+            id: xxx
+            text:
+            textColor:
+            textSize:
+            padding: left,top,right,bottom
+            margin: left,top,right,bottom
+            size:
+        }
+        Space{
+            width: Match_Parent
+            height: 20
+            size:
+        }
+        EditText{
+            id: xxx
+            text:
+            textColor:
+            textSize:
+        }
+        Scrollable{
+            orientation: horizontal/vertical
+            LinearLayout{
+                orientation: horizontal/vertical
+
+                EditTextArea{
+                    id: xxx
+                    text:
+                    textColor:
+                    textSize:
+                    size:
+                }
+                PullDownBox{
+                    size: width,height
+                    items: item1,item2,item3
+                    onSelect: ${listener}.onSelect
+                }
+                Button{
+                    size:
+                    onClick: ${listener}.onClickSelectFile
+                }
+            }
+        }
+
+    }
+}

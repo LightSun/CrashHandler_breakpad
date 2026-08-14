@@ -1,0 +1,96 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 加密解密模块
+        ClassItem{
+            desc: 数据块处理
+            funcContent: 规定的数据块的结构，方便加解密
+            ClassDefine{
+                className: DataBlock
+                superClassName:
+            }
+            Field{
+                name: version
+                type: int
+                desc: 版本
+            }
+            Field{
+                name: blockCount
+                type: int
+                desc: 块的个数
+            }
+            Field{
+                name: blockSizes
+                type: List<uint32>
+                desc: 所有块的大小
+            }
+            Field{
+                name: blockHashes
+                type: List<size_t>
+                desc: 所有块的hash值
+            }
+            Field{
+                name: blockDatas
+                type: List<String>
+                desc: 所有块的数据
+            }
+            Field{
+                name: verifyStates
+                type: List<int>
+                desc: 所有块的校验状态
+            }
+            Method{
+                name: setBlockCount
+                paramStr: int
+                returnStr: void
+                desc: 设置块内部的个数
+                preset: ([->blockCount等于指定参数])
+            }
+            Method{
+                name: isVerifyOk
+                paramStr: void
+                returnStr: bool
+                desc: 是否验证成功
+                preset: ([验证成功->返回真][验证失败->返回假])
+            }
+            Method{
+                name: getDecodeResult
+                paramStr: void
+                returnStr: String
+                desc: 获取解码的结果
+                preset: ([当前数据块有数据->返回解码的数据][当前数据块没有数据->空字符串])
+            }
+            Method{
+                name: setEncodeData
+                paramStr: int,CString
+                returnStr: void
+                desc: 设置编码后的字符串
+                preset: ([->编码的数据放置到指定的数据上])
+            }
+            Method{
+                name: setDecodeData
+                paramStr: int,CString,bool
+                returnStr: void
+                desc: 设置编码后的字符串
+                preset: ([如果校验->编码的数据放置到指定的数据上,校验后设置状态],[如果不校验->编码的数据放置到指定的数据上,并且设置校验状态为真])
+            }
+            Method{
+                name: toString
+                paramStr: void
+                returnStr: String
+                desc: 将所有数据编码为字符串
+                preset: ([->将所有数据序列化为字符串])
+            }
+            Method{
+                name: fromString
+                paramStr: String,bool
+                returnStr: String
+                desc: 将编码后的字符串解密成数据块
+                preset: ([给定的数据确实是之前序列化后的，并且版本和当前一样->返回空字符串][给定的数据是空或者无效的->返回错误的原因])
+            }
+        }
+    }
+}

@@ -1,0 +1,50 @@
+
+DocRule{
+    title: AI模块
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: AI模型加载和推理管理
+        ClassItem{
+            desc: 乳腺病灶诊断流程管线类
+            funcContent: 用于乳腺病灶诊断的流程管理，开启/结束/清理等，可包含多个诊断算法
+            ClassDefine{
+                className: BreastDiagnosisPipeline
+                superClassName: BaseDiagnosisPipeline
+            }
+            Field{
+                name: m_instance
+                type: BreastDiagnosisPipeline*
+                desc: 单例对象
+            }    
+            Method{
+                name: instance
+                paramStr: void
+                returnStr: BreastNoduleDiagnosis*
+                desc: 单例，创建获取类对象实例指针
+                preset: ([->成功获取单例对象])
+            }
+            Method{
+                name: addDiagnosis
+                paramStr: BasicDiagnosis*
+                returnStr: void
+                desc: 添加乳腺诊断算法对象指针
+                preset: ([->添加诊断算法成功])
+            }
+            Method{
+                name: clearDiagnosis
+                paramStr: void
+                returnStr: bool
+                desc: 清除乳腺所有的诊断算法
+                preset: ([->清除诊断算法成功])
+            }
+            Method{
+                name: getDiagnosisPart
+                paramStr: void
+                returnStr: DiagnosisPart
+                desc: 获取诊断的部位
+                preset: ([->返回诊断的部位])
+            }
+        }
+    }
+}

@@ -1,0 +1,38 @@
+
+Window{
+    title: test_heaven7
+    size: 800,600
+    listener: com.heaven7.gui.TestListener
+    LinearLayout{
+        orientation: vertical
+        Space{
+            size:0,30
+        }
+        TextView{
+            id: tv1
+            text: text_view1
+            size: 200,100
+            padding: 50,50,50,50
+            onClick: onClickTV1
+        }
+        Space{
+            size:0,30
+        }
+        EditText{
+            id: et1
+            text: default_text1
+            size: 200,50
+        }
+        SelectFileLine{
+            id: selectFile1
+            lab_text: 请选择文件
+            //lab_size: 50
+            btn_text: 选择文件
+            //btn_size:
+            et_size: 100,30
+            basePath: xxx/xxx
+            on: onSelectFileDone
+            //mode:FILE/DIR/FILE_WITH_DIR
+        }
+    }
+}

@@ -1,0 +1,14 @@
+
+
+WholeRule{
+    title: 乳腺肿块超声影像辅助诊断软件-WholeRule
+    saveFile: test_docx/whole.docx
+    Env{
+       DIR: /home/heaven7/heaven7/work/SE/GenDoc/DocRuleManager/rule/EncDec
+    }
+
+    Files{
+       ${DIR}/aes.rule
+       #${DIR}/padding.rule
+    }	
+}

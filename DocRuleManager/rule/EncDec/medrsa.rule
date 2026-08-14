@@ -1,0 +1,99 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 加密解密模块
+        ClassItem{
+            desc: RAS非对称加密算法
+            funcContent: 用于RAS非对称算法的加密和解密
+            ClassDefine{
+                className: MedRSA
+                superClassName:
+            }
+            Field{
+                name: m_tc
+                type: int
+                desc: 并行的线程数
+            }
+            Field{
+                name: m_keyIsPath
+                type: bool
+                desc: key 是否是文件路径
+            }    
+            Field{
+                name: m_maxLen
+                type: size_t
+                desc: 块的最大长度
+            }
+            Method{
+                name: setKeyIsPath
+                paramStr: bool
+                returnStr: void
+                desc: 设置key 是否代表文件路径
+                preset: ([->m_keyIsPath设置为对应的值])
+            }
+            Method{
+                name: encByPubKey
+                paramStr: CString,CString
+                returnStr: String
+                desc: 公钥加密
+                preset: ([公钥有效->返回加密后的数据][公钥无效->返回空字符串])
+            }
+            Method{
+                name: decByPriKey
+                paramStr: CString,CString,bool
+                returnStr: String
+                desc: 私钥解密
+                preset: ([私钥有效,并且解密成功->返回解密后的数据][私钥无效或者解密失败->返回空字符串])
+            }
+            Method{
+                name: decByPubKey
+                paramStr: CString,CString,bool
+                returnStr: String
+                desc: 公钥解密
+                preset: ([公钥有效,并且解密成功->返回解密后的数据][公钥无效或者解密失败->返回空字符串])
+            }
+            Method{
+                name: encByPriKey
+                paramStr: CString,CString
+                returnStr: String
+                desc: 私钥加密
+                preset: ([私钥有效->返回加密后的数据][私钥无效->返回空字符串])
+            }
+#            Method{
+#                name: encode0
+#                paramStr: void*,bool,CString
+#                returnStr: String
+#                desc: 加密数据
+#            }
+#            Method{
+#                name: decode0
+#                paramStr: void*,bool,CString
+#                returnStr: String
+#                desc: 解密数据
+#            }
+#
+#            Method{
+#                name: createRSA
+#                paramStr: CString,bool
+#                returnStr: void*
+#                desc: 创建RSA对象
+#            }
+#            Method{
+#                name: doEncode
+#                paramStr: void*, bool, CString, DataBlock*
+#                returnStr: void
+#                desc: 执行加密
+#            }
+#            Method{
+#                name: doDecode
+#                paramStr: void*, bool,DataBlock*,bool
+#                returnStr: void
+#                desc: 执行解密
+#            }
+        
+        }
+    }
+}

@@ -1,0 +1,40 @@
+
+DocRule{
+    title: 乳腺AI模型管理器
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: AI模型加载和推理管理
+        ClassItem{
+            desc: 乳腺AI模型管理器
+            funcContent: 主要负责加载模型和相关推理预先处理。
+            ClassDefine{
+                className: BreastModuleManager
+                superClassName: AIModuleManager
+            }
+            Field{
+                name: m_ctx
+                type: BreastModuleManagerCtx0*
+                desc: 乳腺模型管理上下文
+            }
+            Method{
+                name: loadModule
+                paramStr: void
+                returnStr: bool
+                desc: 加载AI模型
+            }
+            Method{
+                name: clearCache
+                paramStr: void
+                returnStr: void
+                desc: 清除缓存
+            }
+            Method{
+                name: getBreastInferManager
+                paramStr: void
+                returnStr: med::BreastInferManager*
+                desc: 获取乳腺推理管理器的指针
+            }
+        }
+    }
+}

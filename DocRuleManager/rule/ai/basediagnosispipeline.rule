@@ -1,0 +1,126 @@
+
+DocRule{
+    title: 病灶诊断流程管线基类，抽象类
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: AI模型加载和推理管理
+        ClassItem{
+            desc: 病灶诊断流程管线基类，抽象类
+            funcContent: 用于病灶诊断的流程管理，开启/结束/清理等，可包含多个诊断算法
+            ClassDefine{
+                className: BaseDiagnosisPipeline
+                superClassName: QObject
+            }
+            Field{
+                name: m_pDiagnosisList
+                type: QList<BasicDiagnosis*>
+                desc: 诊断算法列表
+            }
+            Field{
+                name: m_aiManager
+                type: app::BreastModuleManager
+                desc: 乳腺ai模型管理对象
+            }
+            Field{
+                name: m_nInitComplete
+                type: int
+                desc: 是否初始化完成
+            }
+            Field{
+                name: m_bRuning
+                type: bool
+                desc: 是否在运行
+            }
+            Field{
+                name: m_bFailed
+                type: bool
+                desc: 是否失败
+            }
+            Method{
+                name: addDiagnosis
+                paramStr: BasicDiagnosis*
+                returnStr: bool
+                desc: 添加诊断算法对象指针
+                preset: ([->返回真])
+            }
+            Method{
+                name: clearDiagnosis
+                paramStr: void
+                returnStr: bool
+                desc: 清除所有诊断算法
+                preset: ([->返回真])
+            }
+            Method{
+                name: prparePipeline
+                paramStr: void
+                returnStr: bool
+                desc: 准备诊断管线
+                preset: ([如果没有正在运行->返回真][如果正在运行->返回假])
+            }
+            Method{
+                name: startPipeline
+                paramStr: void
+                returnStr: bool
+                desc: 启动诊断管线
+                preset: ([如果没有正在运行->返回真][如果正在运行->返回假])
+            }
+            Method{
+                name: hangePipeline
+                paramStr: bool
+                returnStr: void
+                desc: 设置诊断管线挂起状态
+                preset: ([->正确设置挂起状态])
+            }
+            Method{
+                name: getHanged
+                paramStr: bool
+                returnStr: void
+                desc: 获取诊断管线挂起状态
+                preset: ([如果有诊断算法处理挂起状态->返回真][如果没有诊断算法处理挂起状态->返回假])
+            }
+            Method{
+                name: stopPipeline
+                paramStr: bool
+                returnStr: void
+                desc: 停止诊断管线
+                preset: ([->返回真])
+            }
+            Method{
+                name: getDiagnosisPart
+                paramStr: DiagnosisPart
+                returnStr: void
+                desc: 获取诊断的部位
+                preset: ([->返回诊断的部位])
+            }
+            Method{
+                name: resetDataList
+                paramStr: void
+                returnStr: void
+                desc: 重置诊断管线各算法线程的数据
+                preset: ([->重置数据状态成功])
+            }
+            Method{
+                name: onInitCompleted
+                paramStr: void
+                returnStr: void
+                desc: 诊断管线算法线程初始化完毕
+                preset: ([->通知初始化完成成功])
+            }
+            Method{
+                name: getDiagnosisPart
+                paramStr: DiagnosisPart
+                returnStr: void
+                desc: 获取诊断的部位
+                preset: ([->返回诊断的部位])
+            }
+            Method{
+                name: resetDataList
+                paramStr: void
+                returnStr: void
+                desc: 重置诊断管线各算法线程的数据
+                preset: ([->重置数据状态成功])
+            }
+        }
+    }
+}

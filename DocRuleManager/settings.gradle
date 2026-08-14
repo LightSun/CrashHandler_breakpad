@@ -1,0 +1,8 @@
+rootProject.name = 'DocRuleManager'
+include 'gui'
+//include 'EZLang'
+//include 'EZLang:StackVM'
+//findProject(':EZLang:StackVM')?.name = 'StackVM'
+//include 'EZLang:OptVM'
+//findProject(':EZLang:OptVM')?.name = 'OptVM'
+

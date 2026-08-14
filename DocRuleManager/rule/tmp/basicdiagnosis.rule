@@ -1,0 +1,69 @@
+
+DocRule{
+    title: 病灶诊断（算法）基类，抽象类
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: AI模型加载和推理管理
+        ClassItem{
+            desc: 病灶诊断（算法）基类，抽象类
+            funcContent: 用于单个病灶诊断的管理，准备/开启/结束等
+            ClassDefine{
+                className: BasicDiagnosis
+                superClassName: QThread
+            }
+            Field{
+                name: m_pAiManager
+                type: app::BreastModuleManager*
+                desc: 乳腺模型推理实现对象
+            }
+            Field{
+                name: m_bPrepared
+                type: bool
+                desc: 是否准备好
+            }
+            Method{
+                name: prepareDiag
+                paramStr: void
+                returnStr: void
+                desc: 准备病灶诊断（算法）
+            }
+            Method{
+                name: startDiag
+                paramStr: void
+                returnStr: void
+                desc: 启动病灶诊断（算法）
+            }
+            Method{
+                name: stopDiag
+                paramStr: void
+                returnStr: void
+                desc: 停止病灶诊断（算法）
+            }
+            Method{
+                name: setHanged
+                paramStr: bool
+                returnStr: void
+                desc: 设置病灶诊断（算法）挂起状态
+            }
+            Method{
+                name: getHanged
+                paramStr: void
+                returnStr: bool
+                desc: 获取病灶诊断（算法）挂起状态
+            }
+            Method{
+                name: resetDataList
+                paramStr: void
+                returnStr: void
+                desc: 重置病灶诊断（算法）的数据
+            }
+            Method{
+                name: setBreastModuleManager
+                paramStr: app::BreastModuleManager*
+                returnStr: void
+                desc: 设置引用的模型管理模块的指针
+            }
+        }
+    }
+}

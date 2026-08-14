@@ -1,0 +1,414 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 加密解密模块
+        ClassItem{
+            desc: io处理类
+            funcContent: 缓冲区数据输出
+            ClassDefine{
+                className: ByteBufferOut
+                superClassName:
+            }
+            Field{
+                name: m_buffer
+                type: std::vector<char>
+                desc: 缓冲区
+            }
+            Field{
+                name: m_pos
+                type: uint64
+                desc: 缓冲区位置
+            }
+            Field{
+                name: m_autoInc
+                type: bool
+                desc: 是否自动增长
+            }
+           
+            Method{
+                name: putByte
+                paramStr: char
+                returnStr: void
+                desc: 放置char数据
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putInt
+                paramStr: int
+                returnStr: void
+                desc: 放置int数据
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putShort
+                paramStr: short
+                returnStr: void
+                desc: 放置short数据
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putLong
+                paramStr: sint64
+                returnStr: void
+                desc: 放置long数据
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putBool
+                paramStr: bool
+                returnStr: void
+                desc: 放置bool数据
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putFloat
+                paramStr: float
+                returnStr: void
+                desc: 放置float数据
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putDouble
+                paramStr: double
+                returnStr: void
+                desc: 放置double数据
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putUByte
+                paramStr: unsigned char
+                returnStr: void
+                desc: 放置unsigned char数据
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putUShort
+                paramStr: unsigned short
+                returnStr: void
+                desc: 放置unsigned short数据
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putUInt
+                paramStr: unsigned int
+                returnStr: void
+                desc: 放置unsigned int数据
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putULong
+                paramStr: uint64
+                returnStr: void
+                desc: 放置uint64数据
+                preset: ([->放置数据成功])
+            }
+
+            Method{
+                name: putData
+                paramStr: const void*,uint64
+                returnStr: void
+                desc: 放置一串数据到缓冲区
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putRawString
+                paramStr: CString
+                returnStr: void
+                desc: 放置字符串数据到缓冲区
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putString16
+                paramStr: CString
+                returnStr: void
+                desc: 放置原始的字符串到缓冲区.并且将字符串的长度用无符号short的大小放置到缓冲区
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putString
+                paramStr: CString
+                returnStr: void
+                desc: 放置原始的字符串到缓冲区.并且将字符串的长度用无符号int的大小放置到缓冲区
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putString64
+                paramStr: CString
+                returnStr: void
+                desc: 放置原始的字符串到缓冲区.并且将字符串的长度用无符号int64的大小放置到缓冲区
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: putListInt
+                paramStr: const std::vector<int>&
+                returnStr: void
+                desc: 放置int数组的数据到缓冲区
+                preset: ([->放置数据成功])
+            }
+            Method{
+                name: getLength
+                paramStr: void
+                returnStr: uint64
+                desc: 获取缓冲区写入的长度
+                preset: ([->能正确获取缓冲区的数据长度])
+            }
+            Method{
+                name: bufferToString
+                paramStr: String&
+                returnStr: void
+                desc: 获取缓冲区的数据并放置到字符串中
+                preset: ([->能获取缓冲区的数据])
+            }
+            Method{
+                name: bufferToString
+                paramStr: void
+                returnStr: String
+                desc: 获取缓冲区的数据
+                preset: ([->能获取缓冲区的数据])
+            }
+            Method{
+                name: prepareBuffer
+                paramStr: uint64
+                returnStr: void
+                desc: 按照长度准备缓冲区
+                preset: ([->准备缓冲区成功])
+            }
+            Method{
+                name: prepareBufferInc
+                paramStr: uint64
+                returnStr: void
+                desc: 按照增量长度准备缓冲区
+                preset: ([->准备缓冲区成功])
+            }
+            Method{
+                name: prepareBufferIncIfNeed
+                paramStr: uint64
+                returnStr: void
+                desc: 按照增量长度准备缓冲区. 如果缓冲区长度足够则无影响
+                preset: ([->准备缓冲区成功])
+            }
+            Method{
+                name: setBufferAutoInc
+                paramStr: bool
+                returnStr: void
+                desc: 设置缓冲区长度自动增长，默认是true
+                preset: ([->m_autoInc为true])
+            }
+            Method{
+                name: data
+                paramStr: void
+                returnStr: char*
+                desc: 获取缓冲区的数据指针
+                preset: ([->返回值不为空指针])
+            }
+
+        }
+
+	ClassItem{
+	    desc: 缓冲区IO读取
+            funcContent: 缓冲区IO对象，主要用来读取数据
+            ClassDefine{
+                className: ByteBufferIO
+                superClassName:
+            }
+            Field{
+                name: m_buf
+                type: String*
+                desc: 缓冲区数据
+            }
+            Field{
+                name: m_pos
+                type: uint64
+                desc: 缓冲区当前位置
+            }
+            Field{
+                name: m_needFree
+                type: bool
+                desc: 是否需要释放缓冲区
+            }
+           
+            Method{
+                name: append
+                paramStr: CString
+                returnStr: void
+                desc: 添加字符串数据
+                preset: ([->添加数据到缓冲区成功])
+            }
+            Method{
+                name: append
+                paramStr: const void*, len
+                returnStr: void
+                desc: 添加一段数据
+                preset: ([->添加数据到缓冲区成功])
+            } 
+            Method{
+                name: trim
+                paramStr: void
+                returnStr: void
+                desc: 将数据强制缩短到有效的长度
+                preset: ([->trim缓冲区成功])
+            } 
+            Method{
+                name: skip
+                paramStr: size_t
+                returnStr: void
+                desc: 跳过指针长度的数据
+                preset: ([->m_pos按照指定的长度增加])
+            } 
+            Method{
+                name: getByte
+                paramStr: void
+                returnStr: char
+                desc: 获取char类型数据
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getInt
+                paramStr: void
+                returnStr: int
+                desc: 获取int类型数据
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getShort
+                paramStr: void
+                returnStr: short
+                desc: 获取short类型数据
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getLong
+                paramStr: void
+                returnStr: sint64
+                desc: 获取sint64类型数据
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getUByte
+                paramStr: void
+                returnStr: unsigned char
+                desc: 获取unsigned char类型数据
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getUShort
+                paramStr: void
+                returnStr: unsigned short
+                desc: 获取unsigned short类型数据
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getUInt
+                paramStr: void
+                returnStr: unsigned int
+                desc: 获取unsigned int类型数据
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getULong
+                paramStr: void
+                returnStr: uint64
+                desc: 获取uint64类型数据
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getBool
+                paramStr: void
+                returnStr: bool
+                desc: 获取bool类型数据
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getFloat
+                paramStr: void
+                returnStr: float
+                desc: 获取float类型数据
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getDouble
+                paramStr: void
+                returnStr: double
+                desc: 获取double类型数据
+                preset: ([->能正确获取数据])
+            } 
+
+            Method{
+                name: getData
+                paramStr: uint64,const void*
+                returnStr: double
+                desc: 获取数据到指定的缓冲区
+                preset: ([->能正确获取数据])
+            } 
+
+            Method{
+                name: getRawString
+                paramStr: uint64
+                returnStr: String
+                desc: 获取指定长度的原始字符串
+                preset: ([->能正确获取数据])
+            } 
+
+            Method{
+                name: getString16
+                paramStr: void
+                returnStr: String
+                desc: 按照长度为无符号short 读取字符串
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getString
+                paramStr: void
+                returnStr: String
+                desc: 按照长度为无符号int 读取字符串
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getString64
+                paramStr: void
+                returnStr: String
+                desc: 按照长度为无符号int64 读取字符串
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getListInt
+                paramStr: std::vector<int>&
+                returnStr: void
+                desc: 获取int数组类型的数据
+                preset: ([->能正确获取数据])
+            } 
+            Method{
+                name: getMap
+                paramStr: std::unordered_map<char, int>&
+                returnStr: void
+                desc: 获取map 类型的数据
+                preset: ([->能正确获取数据])
+            } 
+
+            Method{
+                name: getLeftLength
+                paramStr: void
+                returnStr: uint64
+                desc: 获取剩余数据的长度
+                preset: ([缓冲区没有剩余数据->返回0][缓冲区有数据->返回剩余数据长度])
+            } 
+            Method{
+                name: getLength
+                paramStr: void
+                returnStr: uint64
+                desc: 获取整个数据的长度
+                preset: ([缓冲区没有数据->返回0][缓冲区有数据->返回数据长度])
+            } 
+            /**/Method{
+                name: getCurDataPtr
+                paramStr: void
+                returnStr: char*
+                desc: 获取当前位置数据的指针
+            } 
+ 	
+	}
+    }
+}

@@ -1,0 +1,94 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 推理处理模块
+        ClassItem{
+            desc: AI推理引擎封装
+            funcContent: 封装tensorrt推理的API方便使用
+            ClassDefine{
+                className: TrtInferEngine
+                superClassName: IInferEngine
+            }
+            Field{
+                name: m_impl
+                type: TrtInferEngineCtx0_*
+                desc: 引擎实现
+            }
+            Method{
+                name: isEngineValid
+                paramStr: void
+                returnStr: bool
+                desc: 引擎是否有效
+                preset: ([如果当前引擎有效->返回真][如果当前引擎无效->返回假])
+            }
+            Method{
+                name: build
+                paramStr: void
+                returnStr: bool
+                desc: 构建引擎
+                preset: ([如果构建引擎成功->返回真][如果构建引擎失败->返回假])
+            }
+            Method{
+                name: infer
+                paramStr: cv::Mat&, int
+                returnStr: bool
+                desc: 对图像执行推理
+                preset: ([如果推理成功->返回真][如果推理失败->返回假])
+            }
+            Method{
+                  name: inferBatch
+                  paramStr: std::vector<cv::Mat>&
+                  returnStr: bool
+                  desc: 对多个图像执行批量推理
+                  preset: ([如果批量推理成功->返回真][如果批量推理失败->返回假])
+            }
+
+            Method{
+                  name: initEngine
+                  paramStr: const void*, size_t
+                  returnStr: void
+                  desc: 初始化引擎
+                  preset: ([->初始化引擎成功])
+            }
+            Method{
+                  name: warmUp
+                  paramStr: void
+                  returnStr: void
+                  desc: 热身
+                  preset: ([->引擎预热成功])
+            }
+            Method{
+                  name: processDims
+                  paramStr: void
+                  returnStr: bool
+                  desc: 处理张量的shape
+                  preset: ([如果引擎加载成功->返回真][如果引擎加载失败->返回假])
+            }
+            Method{
+                  name: prepareExecuteContext
+                  paramStr: void
+                  returnStr: bool
+                  desc: 准备执行上下文
+                  preset: ([如果准备执行上下文成功->返回真][如果准备执行上下文失败->返回假])
+            }
+            Method{
+                  name: getOutputTensorCount
+                  paramStr: void*
+                  returnStr: size_t
+                  desc: 获取输出的tensor个数
+                  preset: ([->返回输出的tensor个数])
+            }
+            Method{
+                  name: getOutputDims
+                  paramStr: int,Dims
+                  returnStr: bool
+                  desc: 获取指定张量输出的shape
+                  preset: ([如果构建引擎成功并且指定的tensor索引存在->返回真][反之->返回假])
+            }
+
+        }
+    }
+}

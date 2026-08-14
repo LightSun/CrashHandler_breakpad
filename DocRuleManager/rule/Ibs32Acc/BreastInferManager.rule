@@ -1,0 +1,155 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 推理处理模块
+        ClassItem{
+            desc: 乳腺推理管理器
+            funcContent: 用于乳腺的推理
+            ClassDefine{
+                className: BreastInferManager
+                superClassName:
+            }
+            Field{
+                name: m_groups
+                type: std::vector<GroupRec>
+                desc: 推理引擎多个分组
+            }
+            Field{
+                name: m_config
+                type: BreastInferManager::Config
+                desc: 推理的配置
+            }
+            Method{
+                name: setRecognizers
+                paramStr: const List<Recognizer*>&
+                returnStr: void
+                desc: 设置乳腺推理的多个分类器
+                preset: ([->设置成功])
+            }
+            Method{
+                name: getConfig
+                paramStr: void
+                returnStr: Config&
+                desc: 获取乳腺推理的配置
+                preset: ([->获取乳腺推理的配置成功])
+            }
+            Method{
+                name: setConfig
+                paramStr: const Config&
+                returnStr: void
+                desc: 设置乳腺推理的配置
+                preset: ([->设置成功])
+            }
+	        Method{
+                name: clearMultiFrameData
+                paramStr: void
+                returnStr: void
+                desc: 清除多帧数据的缓存
+                preset: ([->清除多帧数据成功])
+            }
+	        Method{
+                name: infer
+                paramStr: cv::Mat&,const std::vector<cv::Rect>&,BreastClsItemDelegate*
+                returnStr: int
+                desc: 执行推理逻辑
+                preset: ([如果给定的推理输出为空或者图像为空或者box无效->返回推理无效的状态][如果给定的图像、box、输出的对象都正常->返回推理成功的状态])
+            }
+	        Method{
+                name: processMultiFrames
+                paramStr: BreastClsItemDelegate*
+                returnStr: void
+                desc: 多帧处理
+                preset: ([->多帧处理成功])
+            }
+        }
+	ClassItem{
+            desc: 乳腺分类单个条目
+            funcContent: 乳腺分类结果的单个条目
+            ClassDefine{
+                className: ClsItem
+                superClassName:
+            }
+            Field{
+                name: pbs
+                type: List<float>
+                desc: 推理结果的概率组合
+            }
+            Field{
+                name: gc
+                type: int 
+                desc: 推理的次数,用于求平均值
+            }
+            Method{
+                name: sum
+                paramStr: const List<float>&,int
+                returnStr: void
+                desc: 概率求和
+                preset: ([->求和成功])
+            }
+            Method{
+                name: avg
+                paramStr: void
+                returnStr: List<float>
+                desc: 概率求平均值
+                preset: ([->求平均值成功])
+            }
+	}
+	ClassItem{
+            desc: 推理的分组
+            funcContent: 用于将多个分类模型分组推理
+            ClassDefine{
+                className: GroupRec
+                superClassName:
+            }
+            Field{
+                name: recs
+                type: std::vector<Recognizer*>
+                desc: 组包含的多个分类器
+            }
+            Field{
+                name: items
+                type: List<ClsItem> 
+                desc: 多个分类结果
+            }
+            Method{
+                name: inferBatch
+                paramStr: List<cv::Mat>&
+                returnStr: void
+                desc: 批量推理
+                preset: ([->批量推理成功])
+            }
+            Method{
+                name: mockInferAndSum
+                paramStr: int
+                returnStr: void
+                desc: 模拟推理并且求和, 内部测试用
+                preset: ([->模拟推理并且求和成功])
+            }
+            Method{
+                name: sum
+                paramStr: GroupRec&
+                returnStr: void
+                desc: 跟另外一个分组求和
+                preset: ([->分组求和成功])
+            }
+            Method{
+                name: avg
+                paramStr: void
+                returnStr: List<List<float>>
+                desc: 求平均概率
+                preset: ([->分组求和成功])
+                preset: ([->求平均概率成功])
+            }
+            /**/Method{
+                name: sumOfProbs
+                paramStr: int
+                returnStr: void
+                desc: 概率求和
+                preset: ([->概率求和成功])
+            }	
+	}
+    }
+}

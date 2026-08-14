@@ -1,0 +1,92 @@
+
+DocRule{
+    title: AI模块
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: AI模型加载和推理管理
+        ClassItem{
+            desc: 乳腺病灶诊断推理算法类
+            funcContent: 用于推理算法的管理，准备/开启/结束等
+            ClassDefine{
+                className: BreastNoduleDiagnosis
+                superClassName: BasicDiagnosis
+            }
+            Field{
+                name: m_instance
+                type: BreastNoduleDiagnosis*
+                desc: 单例对象
+            }
+            Field{
+                name: m_mutex
+                type: QMutex
+                desc: 同步锁
+            }
+            Field{
+                name: m_lastImgTime
+                type: long long
+                desc: 上次更新的时间
+            }
+            Field{
+                name: m_bRun
+                type: bool
+                desc: 是否在运行
+            }
+            Field{
+                name: m_bHanged
+                type: bool
+                desc: 是否挂起
+            }
+            Field{
+                name: m_fps
+                type: FPS
+                desc: 帧率对象
+            }
+            Field{
+                name: m_firstSameData
+                type: MedBreastData
+                desc: 乳腺数据
+            }
+            Field{
+                name: m_initMat
+                type: cv::Mat
+                desc: opencv图像
+            }
+            Method{
+                name: instance
+                paramStr: void
+                returnStr: BreastNoduleDiagnosis*
+                desc: 单例，创建获取类对象实例指针
+                preset: ([->获取单例对象成功])
+            }
+            Method{
+                name: startDiag
+                paramStr: void
+                returnStr: void
+                desc: 启动病灶诊断（算法）
+                preset: ([->启动病灶诊断成功])
+            }
+            Method{
+                name: stopDiag
+                paramStr: void
+                returnStr: void
+                desc: 停止病灶诊断（算法）
+                preset: ([->停止病灶诊断成功])
+            }
+            Method{
+                name: setHanged
+                paramStr: bool
+                returnStr: void
+                desc: 设置病灶诊断（算法）挂起状态
+                preset: ([->设置挂起状态成功])
+            }
+            Method{
+                name: getHanged
+                paramStr: void
+                returnStr: bool
+                desc: 获取病灶诊断（算法）挂起状态
+                preset: ([如果正处于挂起状态->返回真][如果没有处于挂起状态->返回假])
+            }
+        }
+    }
+}

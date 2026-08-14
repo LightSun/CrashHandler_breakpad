@@ -1,0 +1,44 @@
+
+DocRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ibs3.2_EncDec.docx
+    Module{
+        index: 1
+        name: 推理处理模块
+        ClassItem{
+            desc: 推理对象基类
+            funcContent: 封装推理常用的功能。
+            ClassDefine{
+                className: TrtRecognizer
+                superClassName: 
+            }
+            /**/Field{
+                name: m_tc
+                type: int
+                desc: 并行的线程数
+            }
+            Method{
+                name: build
+                paramStr: void
+                returnStr: bool
+                desc: 构建推理引擎
+                preset: ([如果构建推理引擎成功->返回真][如果构建推理引擎失败->返回假])
+            }
+            Method{
+                name: infer
+                paramStr: cv::Mat&
+                returnStr: bool
+                desc: 推理单张图
+                preset: ([如果推理成功->返回真][如果推理失败->返回假])
+            }
+            Method{
+                name: setInferEngine
+                paramStr: std::shared_ptr<IInferEngine>
+                returnStr: void
+                desc: 设置推理引擎
+                preset: ([->这只推理引擎成功])
+            }
+        
+        }
+    }
+}

@@ -1,0 +1,65 @@
+
+Window{
+    title: test_heaven7
+    size: 800,600
+    //listener: com.med.qa.common.log.LogListener
+
+    LinearLayout{
+        orientation: vertical
+        Space{
+            size:0,20
+        }
+        SelectFileLine{
+            lab_text: 请选择文件
+            //lab_size: 50
+            btn_text: 选择文件
+            //btn_size:
+            et_size: 100,30
+            //basePath: xxx/xxx
+            on: onSelectFileDone
+            mode: FILE
+        }
+        Space{
+            size:0,10
+        }
+        LinearLayout{
+            orientation: horizontal
+            TextView{
+                id: tv1
+                text: text_view1
+                size: 200,50
+                padding: 10,10,10,10
+            }
+            Space{
+                size:10,0
+            }
+            EditText{
+                id: et_filter_txt
+                //text: default_text1
+                size: 200,50
+            }
+            Space{
+                size:10,0
+            }
+            Button{
+                id: bt_exec
+                text: 执行过滤
+                size: 160, 40
+            }
+            Space{
+                size:20,0
+            }
+        }
+        Space{
+            size:0,20
+        }
+        Scrollable{
+            orientation: vertical
+            EditTextArea{
+                id: et_filter_result
+                size: 200,50
+                padding: 25,20,25,20
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+WholeRule{
+    title: 乳腺肿块超声影像辅助诊断软件
+    saveFile: test_docx/ruxian_cj.docx
+    Env{
+       DIR: /home/heaven7/heaven7/work/SE/GenDoc/DocRuleManager/rule
+    }
+
+    Files{
+       ${DIR}/EncDec : 1
+       ${DIR}/Ibs32Acc : 2
+       ${DIR}/ai : 3
+    }
+}
